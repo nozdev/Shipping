@@ -1,0 +1,10 @@
+{
+  "name": "dotnet-10-codespace",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:10",  // or other .NET 10 base image
+  "features": {
+    "dotnet": {}
+  },
+  "postCreateCommand": "dotnet restore",
+  "forwardPorts": [5000],
+  "remoteUser": "vscode"
+}
