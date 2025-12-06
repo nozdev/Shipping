@@ -1,12 +1,6 @@
 {
   "name": "Shipping Dev Container",
   "image": "mcr.microsoft.com/vscode/devcontainers/dotnet:10",
-  "features": {
-    "mssql-server": {}
-  },
   "forwardPorts": [1433],
-  "remoteEnv": {
-    "ConnectionStrings__ShippingDb": "Server=localhost,1433;Database=ShippingDb;User Id=sa;Password=P@ssw0rd123;"
-  },
   "postCreateCommand": "dotnet restore"
 }
