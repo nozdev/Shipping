@@ -1,14 +1,6 @@
 version: '3.8'
 
 services:
-  app:
-    image: mcr.microsoft.com/devcontainers/dotnet:10.0
-    volumes:
-      - ..:/workspace:cached
-    command: sleep infinity
-    container_name: dotnet-app
-    user: vscode
-
   sql:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: sqlserver-dev
