@@ -22,10 +22,10 @@ namespace Shipping.Domain
             var unloadTime = (spec.LatestArrival ?? now.AddDays(2)).AddHours(-1);
 
             var leg = new Leg(vesselVoyageId: "V001",
-                              LoadLocation: origin,
-                              LoadTime: loadTime,
-                              UnloadLocation: spec.Destination,
-                              UnloadTime: unloadTime);
+                              loadLocation: origin,
+                              loadTime: loadTime,
+                              unloadLocation: spec.Destination,
+                              unloadTime: unloadTime);
 
             legs.Add(leg);
             return new Itinerary(legs);

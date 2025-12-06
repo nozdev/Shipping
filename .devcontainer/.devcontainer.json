@@ -1,22 +1,36 @@
 {
   "name": "DotNet 10 Development",
-  "image": "mcr.microsoft.com/devcontainers/dotnet:10.0",
+  "dockerComposeFile": [
+    "docker-compose.yml"
+  ],
+  "service": "app",
+  "workspaceFolder": "/workspace",
+
   "features": {
     "ghcr.io/devcontainers/features/dotnet:2": {
       "version": "10.0"
     }
   },
+
   "postCreateCommand": "dotnet restore",
+
   "customizations": {
     "vscode": {
       "extensions": [
         "ms-dotnettools.csharp",
         "ms-dotnettools.vscode-dotnet-runtime",
         "ms-dotnettools.vscode-dotnet-pack",
-        "ms-dotnettools.vscode-dotnet-test-explorer"
+        "ms-dotnettools.vscode-dotnet-test-explorer",
+        "ms-mssql.mssql"
       ]
     }
   },
-  "forwardPorts": [5000, 5001],
+
+  "forwardPorts": [
+    5000,
+    5001,
+    1433
+  ],
+
   "remoteUser": "vscode"
 }

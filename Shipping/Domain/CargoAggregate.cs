@@ -1,13 +1,14 @@
 // File: Domain/CargoAggregate.cs
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 
 namespace Shipping.Domain
 {
     // Delivery history is modeled as part of the Cargo aggregate initially.
     // In the refined model it can be derived from HandlingEvent repository; still kept here as a simple in-memory representation when needed.
-    public class DeliveryHistory
+    public class DeliveryHistory : Entity
     {
         // Note: when HandlingEvent is its own aggregate, history may be rebuilt from repository queries.
         private readonly List<Guid> _handlingEventIds = new();
@@ -28,6 +29,8 @@ namespace Shipping.Domain
         public DeliverySpecification? DeliverySpecification { get; private set; }
         public DeliveryHistory DeliveryHistory { get; private set; }
         public decimal Size { get; private set; }        // e.g., capacity units
+
+        [NotMapped] 
         public Dictionary<string, Guid> CustomerRoles { get; private set; } // role -> customerId
 
         public Itinerary? AssignedItinerary { get; private set; } // derived/assigned itinerary

@@ -27,11 +27,17 @@ namespace Shipping.Domain
     // CarrierMovement is an aggregate root representing a scheduled movement (a transport leg in schedule)
     public class CarrierMovement : Entity
     {
-        public string ScheduleId { get; private set; } // external schedule id
-        public Location From { get; private set; }
-        public Location To { get; private set; }
-        public DateTime Departure { get; private set; }
-        public DateTime Arrival { get; private set; }
+        public string ScheduleId { get; set; }
+
+        // Navigation properties
+        public Location From { get; set; }
+        public Location To { get; set; }
+
+        public DateTime Departure { get; set; }
+        public DateTime Arrival { get; set; }
+
+        // EF Core needs a parameterless constructor
+        public CarrierMovement() { }
 
         public CarrierMovement(string scheduleId, Location from, Location to, DateTime departure, DateTime arrival)
         {
@@ -47,12 +53,23 @@ namespace Shipping.Domain
     // HandlingEvent can be its own aggregate (created in low-contention transactions)
     public class HandlingEvent : Entity
     {
-        public Guid CargoId { get; private set; }         // reference (not navigation) to Cargo
-        public Guid? CarrierMovementId { get; private set; } // optional relation to movement
-        public string EventType { get; private set; }     // "Load","Unload","Customs","Claim"...
-        public DateTime EventTime { get; private set; }
-        public Location Location { get; private set; }
-        public string Details { get; private set; }
+       // Scalar properties
+        public Guid CargoId { get; set; }
+        public string EventType { get; set; }
+        public DateTime EventTime { get; set; }
+
+        // Store location as a scalar for EF Core
+        public string LocationCode { get; set; }
+
+        // Navigation properties
+        public Location Location { get; set; }
+        public Guid? CarrierMovementId { get; set; }
+        public CarrierMovement CarrierMovement { get; set; }
+
+        public string Details { get; set; }
+
+        // Parameterless constructor for EF Core
+        public HandlingEvent() { }
 
         public HandlingEvent(Guid cargoId, string eventType, DateTime eventTime, Location location, Guid? carrierMovementId = null, string details = "")
         {
