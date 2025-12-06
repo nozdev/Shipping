@@ -1,10 +1,22 @@
 {
-  "name": "dotnet-10-codespace",
-  "image": "mcr.microsoft.com/devcontainers/dotnet:10",  // or other .NET 10 base image
+  "name": "DotNet 10 Development",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:10.0",
   "features": {
-    "dotnet": {}
+    "ghcr.io/devcontainers/features/dotnet:2": {
+      "version": "10.0"
+    }
   },
   "postCreateCommand": "dotnet restore",
-  "forwardPorts": [5000],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-dotnettools.csharp",
+        "ms-dotnettools.vscode-dotnet-runtime",
+        "ms-dotnettools.vscode-dotnet-pack",
+        "ms-dotnettools.vscode-dotnet-test-explorer"
+      ]
+    }
+  },
+  "forwardPorts": [5000, 5001],
   "remoteUser": "vscode"
 }
