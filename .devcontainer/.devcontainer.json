@@ -1,36 +1,12 @@
 {
-  "name": "DotNet 10 Development",
-  "dockerComposeFile": [
-    "docker-compose.yml"
-  ],
-  "service": "app",
-  "workspaceFolder": "/workspace",
-
+  "name": "Shipping Dev Container",
+  "image": "mcr.microsoft.com/vscode/devcontainers/dotnet:10",
   "features": {
-    "ghcr.io/devcontainers/features/dotnet:2": {
-      "version": "10.0"
-    }
+    "mssql-server": {}
   },
-
-  "postCreateCommand": "dotnet restore",
-
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "ms-dotnettools.csharp",
-        "ms-dotnettools.vscode-dotnet-runtime",
-        "ms-dotnettools.vscode-dotnet-pack",
-        "ms-dotnettools.vscode-dotnet-test-explorer",
-        "ms-mssql.mssql"
-      ]
-    }
+  "forwardPorts": [1433],
+  "remoteEnv": {
+    "ConnectionStrings__ShippingDb": "Server=localhost,1433;Database=ShippingDb;User Id=sa;Password=P@ssw0rd123;"
   },
-
-  "forwardPorts": [
-    5000,
-    5001,
-    1433
-  ],
-
-  "remoteUser": "vscode"
+  "postCreateCommand": "dotnet restore"
 }
